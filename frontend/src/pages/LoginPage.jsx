@@ -1,12 +1,30 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import InputField from "../components/InputField";
+import { useMutation } from "@apollo/client";
+import { LOGIN } from "../graphql/mutations/user.mutation";
+import toast from "react-hot-toast";
 
 const LoginPage = () => {
 	const [loginData, setLoginData] = useState({
 		username: "",
 		password: "",
 	});
+	const [login,{loading,error}]=useMutation(LOGIN,{
+		refetchQueries:["GetAuthenticatedUser"]
+	})
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		if (!loginData.username || !loginData.password) return toast.error("Please fill in all fields");
+		try {
+			await login({ variables: { input: loginData } });
+		} catch (error) {
+			console.error("Error logging in:", error);
+			toast.error(error.message);
+		}
+	};
+
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -16,10 +34,6 @@ const LoginPage = () => {
 		}));
 	};
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		console.log(loginData);
-	};
 
 	return (
 		<div className='flex justify-center items-center h-screen'>
