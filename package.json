@@ -2,10 +2,11 @@
   "name": "expense-tracker",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-    "start": "node backend/index.js",
-    "dev": "nodemon backend/index.js"
-  },
+	"scripts": {
+		"start": "NODE_ENV=production node backend/index.js",
+		"dev": "NODE_ENV=development nodemon backend/index.js",
+		"build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
+	},
   "keywords": [],
   "author": "",
   "license": "ISC",
