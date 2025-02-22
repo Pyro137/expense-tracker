@@ -5,7 +5,7 @@ import { GET_TRANSACTIONS } from "../graphql/queries/transaction.query";
 
 const TransactionForm = () => {
 	const [createTransaction,{loading,error}]= useMutation(CREATE_TRANSACTION,{
-		refetchQueries:[GET_TRANSACTIONS]
+		refetchQueries:[GET_TRANSACTIONS,"GetTransactionStatistics"]
 	})
 
 	const handleSubmit = async (e) => {
