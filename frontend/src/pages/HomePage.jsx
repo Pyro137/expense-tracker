@@ -4,8 +4,9 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import Cards from "../components/Cards";
 import TransactionForm from "../components/TransactionForm";
 
+
 import { MdLogout } from "react-icons/md";
-import { useMutation } from "@apollo/client";
+import { useMutation} from "@apollo/client";
 import { LOG_OUT } from "../graphql/mutations/user.mutation";
 import toast from "react-hot-toast";
 
@@ -27,6 +28,7 @@ const HomePage = () => {
 			},
 		],
 	};
+
 
 	const [logout, { loading }] = useMutation(LOG_OUT, {
 		refetchQueries: ["GetAuthenticatedUser"],
